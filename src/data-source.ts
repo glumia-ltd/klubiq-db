@@ -34,5 +34,3 @@ export const AppDataSource = new DataSource({
     migrations: ['build/migrations/*.js'],
     subscribers: [],
 })
-// entities: ["src/entity/*.entity.ts"],
-//     migrations: [],

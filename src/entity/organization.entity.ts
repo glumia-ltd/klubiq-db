@@ -27,6 +27,20 @@ export class Organization {
 	@Column({ default: true })
 	isActive?: boolean;
 
+	@Column({ default: false })
+	isVerified?: boolean;
+
+	@Column({ nullable: true })
+	email? : string;
+
+	@Column({ nullable: true })
+	govRegistrationNumber? : string;
+
+	@Column({ nullable: true })
+	countryPhoneCode? : string;
+
+	@Column({ nullable: true })
+	phoneNumber? : string;
 
 	@Index()
 	@Column({ length: 100, unique: true })
@@ -48,4 +62,29 @@ export class Organization {
 
 	@UpdateDateColumn()
 	updatedDate?: Date;
+
+	@Column({ nullable: true })
+	street?: string;
+
+	@Column({ nullable: true })
+	addressLine2?: string;
+
+	@Column({ nullable: true })
+	state?: string;
+
+	@Column({ nullable: true })
+	city?: string;
+
+	@Column({ nullable: true })
+	country?: string;
+
+	@Column({ nullable: true })
+	postalCode?: string;
+
+	@Column({ nullable: true })
+	companyType?: string;
+
+	@Column({ nullable: true })
+	website? : string;
+
 }

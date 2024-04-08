@@ -15,7 +15,13 @@
       "typeorm": "0.3.20"
    },
    "scripts": {
+      "build": "npx tsc",
       "start": "ts-node src/index.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "typeorm": "typeorm-ts-node-commonjs",
+      "generate:migration": "typeorm migration:generate build/migrations/${npm_config_migration_name} -o -d build/data-source.js",
+      "run:migration": "typeorm migration:run -d build/data-source.js",
+      "run:migration:revert": "typeorm migration:revert -d build/data-source.js"
+
+
    }
 }
