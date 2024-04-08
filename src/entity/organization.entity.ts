@@ -87,4 +87,13 @@ export class Organization {
 	@Column({ nullable: true })
 	website? : string;
 
+	@Column({ nullable: true })
+	logoUrl?: string;
+
+	@Column({ default: false })
+	isRentDueEmailNotificationEnabled?: boolean;
+
+	@Column({ default: false })
+	isMaintenanceRequestNotificationEnabled?: boolean;
+
 }
