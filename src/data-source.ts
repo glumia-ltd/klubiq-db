@@ -31,6 +31,6 @@ export const AppDataSource = new DataSource({
         Permission, 
         Role, 
         UserProfile],
-    migrations: ['build/migrations/*.js'],
+    migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
 })
