@@ -44,7 +44,7 @@ export class Property {
 	@Column({ type: 'text', nullable: true })
 	note?: string;
 
-	@Column({ type: 'array' })
+	@Column({ type: 'simple-array' })
 	tags: string[];
 
 	@Column()
