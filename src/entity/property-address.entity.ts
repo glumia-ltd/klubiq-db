@@ -1,12 +1,24 @@
 import {
 	Column,
+	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm';
-import { AbstractEntity } from './abstract-entity';
 
 @Entity({ schema: 'poo' })
-export class PropertyAddress extends AbstractEntity{
+export class PropertyAddress {
+
+	@PrimaryGeneratedColumn()
+	public id: number;
+
+	@CreateDateColumn()
+	createdDate?: Date;
+
+	@UpdateDateColumn()
+	updatedDate?: Date;
+
 
 	@Column({ length: 100 })
 	addressLine1: string;
@@ -29,10 +41,10 @@ export class PropertyAddress extends AbstractEntity{
 	@Column()
 	isManualAddress: boolean;
 
-	@Column({type: 'decimal'})
+	@Column({ type: 'decimal' })
 	latitude: number;
 
-	@Column({type: 'decimal'})
+	@Column({ type: 'decimal' })
 	longitude: number;
 
 	@DeleteDateColumn()
