@@ -50,11 +50,14 @@ export class Property {
 	@Column()
 	isMultiUnit: boolean;
 
-	@Column({ type: 'decimal', precision: 3, scale: 1 })
-	bedrooms: number;
+	@Column({ type: 'decimal' })
+	bedroom: number;
 
-	@Column({ type: 'decimal', precision: 3, scale: 1 })
-	bathrooms: number;
+	@Column({ type: 'decimal' })
+	bathroom: number;
+
+	@Column({ type: 'decimal' })
+	toilet: number;
 
 	@Column({ type: 'json' })
 	area: { value: number, unit: string };
