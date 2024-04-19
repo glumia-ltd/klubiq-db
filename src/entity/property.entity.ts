@@ -39,7 +39,7 @@ export class Property {
 	name: string;
 
 	@Column({ type: 'text', nullable: true })
-	descritption?: string;
+	description?: string;
 
 	@Column({ type: 'text', nullable: true })
 	note?: string;
