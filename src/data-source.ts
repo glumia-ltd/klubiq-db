@@ -9,6 +9,12 @@ import { FeaturePermission } from './entity/feature-permission.entity';
 import { Permission } from './entity/permission.entity';
 import { Role } from './entity/role.entity';
 import { UserProfile } from './entity/user-profile.entity';
+import { PropertyAddress } from './entity/property-address.entity';
+import { Property } from './entity/property.entity';
+import { PropertyCategory } from './entity/property-category.entity';
+import { PropertyPurpose } from './entity/property-purpose.entity';
+import { PropertyStatus } from './entity/property-status.entity';
+import { PropertyType } from './entity/property-type.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -23,14 +29,21 @@ export const AppDataSource = new DataSource({
         rejectUnauthorized: false,
     },
     logging: false,
-    entities: [Organization, 
-        OrganizationRole, 
-        OrganizationUser, 
-        Feature, 
-        FeaturePermission, 
-        Permission, 
-        Role, 
-        UserProfile],
+    entities: [Organization,
+        OrganizationRole,
+        OrganizationUser,
+        Feature,
+        FeaturePermission,
+        Permission,
+        Role,
+        UserProfile,
+        PropertyAddress,
+        Property,
+        PropertyCategory,
+        PropertyPurpose,
+        PropertyStatus,
+        PropertyType
+    ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
 })

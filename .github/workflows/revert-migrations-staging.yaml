@@ -1,0 +1,33 @@
+
+
+name: Run Database Migration
+on:
+  workflow_dispatch:
+env: 
+  DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+  DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+  DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
+  DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+  DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+  SYNCHRONIZE_DB: ${{ secrets.SYNCHRONIZE_DB }}
+  NODE_ENV: ${{ secrets.ENV }}
+
+jobs:    
+  migration:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build entities
+        run: |
+          npm install
+          npm run build
+
+      - name: Revert migration
+        id: revert-migration
+        run: |
+          npm run migration:revert
+      
+    
+
+  
