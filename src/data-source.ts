@@ -15,6 +15,8 @@ import { PropertyCategory } from './entity/property-category.entity';
 import { PropertyPurpose } from './entity/property-purpose.entity';
 import { PropertyStatus } from './entity/property-status.entity';
 import { PropertyType } from './entity/property-type.entity';
+import { PropertyAmenity } from './entity/property-amenity.entity';
+import { PropertyImage } from './entity/property-image.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -42,7 +44,9 @@ export const AppDataSource = new DataSource({
         PropertyCategory,
         PropertyPurpose,
         PropertyStatus,
-        PropertyType
+        PropertyType,
+        PropertyAmenity,
+        PropertyImage
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],

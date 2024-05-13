@@ -10,10 +10,12 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	Index,
+	OneToMany,
 } from 'typeorm';
 import { UserProfile } from './user-profile.entity';
 import { OrganizationRole } from './organization-role.entity';
 import { Organization } from './organization.entity';
+import { Property } from './property.entity';
 
 
 @Entity({ schema: 'poo' })
@@ -81,4 +83,10 @@ export class OrganizationUser {
 
 	@UpdateDateColumn()
 	updatedDate?: Date;
+
+	@OneToMany(() => Property, (property) => property.manager)
+	propertiesManaged?: Property[]
+
+	@OneToMany(() => Property, (property) => property.owner)
+	propertiesOwned?: Property[]
 }

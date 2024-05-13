@@ -7,7 +7,10 @@ import {
 	Generated,
 	Index,
 	JoinColumn,
+	JoinTable,
+	ManyToMany,
 	ManyToOne,
+	OneToMany,
 	OneToOne,
 	PrimaryGeneratedColumn,
 	Tree,
@@ -21,55 +24,71 @@ import { PropertyType } from './property-type.entity';
 import { Organization } from './organization.entity';
 import { PropertyPurpose } from './property-purpose.entity';
 import { PropertyStatus } from './property-status.entity';
+import { OrganizationUser } from './organization-user.entity';
+import { PropertyAmenity } from './property-amenity.entity';
+import { PropertyImage } from './property-image.entity';
 
 @Entity({ schema: 'poo' })
-@Tree("closure-table", {
-	closureTableName: 'property_unit'
+@Tree('closure-table', {
+	closureTableName: 'property_unit',
 })
 export class Property {
+
 	@PrimaryGeneratedColumn('uuid')
 	uuid?: string;
+
 
 	@Index()
 	@Generated('increment')
 	@Column({ unique: true })
 	id?: number;
 
+
 	@Column({ length: 100 })
 	name: string;
+
 
 	@Column({ type: 'text', nullable: true })
 	description?: string;
 
+
 	@Column({ type: 'text', nullable: true })
 	note?: string;
 
-	@Column({ type: 'simple-array' })
-	tags: string[];
+
+	@Column({ type: 'simple-array', nullable: true })
+	tags?: string[];
+
 
 	@Column()
 	isMultiUnit: boolean;
 
-	@Column({ type: 'decimal' })
-	bedroom: number;
 
-	@Column({ type: 'decimal' })
-	bathroom: number;
+	@Column({ type: 'decimal', nullable: true })
+	bedroom?: number;
 
-	@Column({ type: 'decimal' })
-	toilet: number;
 
-	@Column({ type: 'json' })
-	area: { value: number, unit: string };
+	@Column({ type: 'decimal', nullable: true })
+	bathroom?: number;
+
+
+	@Column({ type: 'decimal', nullable: true })
+	toilet?: number;
+
+
+	@Column({ type: 'json', nullable: true })
+	area?: { value: number; unit: string };
 
 	@DeleteDateColumn()
 	deletedDate?: Date;
 
+
 	@Column({ default: false })
 	isArchived?: boolean;
 
-	@Column()
-	aechivedDate?: Date;
+
+	@Column({ nullable: true })
+	archivedDate?: Date;
 
 	@CreateDateColumn()
 	createdDate?: Date;
@@ -84,7 +103,6 @@ export class Property {
 	})
 	category: PropertyCategory;
 
-
 	@ManyToOne(() => PropertyType, { eager: true })
 	@JoinColumn({
 		name: 'typeId',
@@ -92,25 +110,22 @@ export class Property {
 	})
 	type: PropertyType;
 
-
 	@ManyToOne(() => PropertyPurpose, { eager: true })
 	@JoinColumn({
 		name: 'purposeId',
 		referencedColumnName: 'id',
 	})
-	purpose: PropertyPurpose;
+	purpose?: PropertyPurpose;
+
 
 	@ManyToOne(() => PropertyStatus, { eager: true })
 	@JoinColumn({
 		name: 'statusId',
 		referencedColumnName: 'id',
 	})
-	status: PropertyStatus;
+	status?: PropertyStatus;
 
-	@OneToOne(
-		() => PropertyAddress,
-		{ eager: true, cascade: true }
-	)
+	@OneToOne(() => PropertyAddress, { eager: true, cascade: true })
 	@JoinColumn()
 	address: PropertyAddress;
 
@@ -122,8 +137,29 @@ export class Property {
 	organization: Organization;
 
 	@TreeParent()
-	parentProperty: Property;
+	parentProperty?: Property;
 
 	@TreeChildren()
-	units: Property[];
+	units?: Property[];
+
+	@ManyToMany(() => PropertyAmenity, (amenity) => amenity.properties, {
+		cascade: ["insert"]
+	})
+	@JoinTable()
+	amenities?: PropertyAmenity[];
+
+
+	@Column()
+	isDraft: boolean;
+
+	@OneToMany(() => PropertyImage, (image) => image.property, {
+		cascade: ["insert"]
+	})
+	images?: PropertyImage[]
+
+	@ManyToOne(() => OrganizationUser, (orgUser) => orgUser.propertiesOwned)
+	owner?: OrganizationUser;
+
+	@ManyToOne(() => OrganizationUser, (orgUser) => orgUser.propertiesManaged)
+	manager?: OrganizationUser;
 }
