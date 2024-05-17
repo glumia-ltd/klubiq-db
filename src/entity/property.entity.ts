@@ -25,7 +25,7 @@ import { Organization } from './organization.entity';
 import { PropertyPurpose } from './property-purpose.entity';
 import { PropertyStatus } from './property-status.entity';
 import { OrganizationUser } from './organization-user.entity';
-import { PropertyAmenity } from './property-amenity.entity';
+import { Amenity } from './property-amenity.entity';
 import { PropertyImage } from './property-image.entity';
 
 @Entity({ schema: 'poo' })
@@ -44,6 +44,7 @@ export class Property {
 	id?: number;
 
 
+	@Index()
 	@Column({ length: 100 })
 	name: string;
 
@@ -60,7 +61,7 @@ export class Property {
 	tags?: string[];
 
 
-	@Column()
+	@Column({ default: false })
 	isMultiUnit: boolean;
 
 
@@ -125,9 +126,9 @@ export class Property {
 	})
 	status?: PropertyStatus;
 
-	@OneToOne(() => PropertyAddress, { eager: true, cascade: true })
+	@OneToOne(() => PropertyAddress, { eager: true, cascade: ['insert'], nullable: true })
 	@JoinColumn()
-	address: PropertyAddress;
+	address?: PropertyAddress;
 
 	@ManyToOne(() => Organization, { eager: true })
 	@JoinColumn({
@@ -139,17 +140,27 @@ export class Property {
 	@TreeParent()
 	parentProperty?: Property;
 
-	@TreeChildren()
+	@TreeChildren({ cascade: true })
 	units?: Property[];
 
-	@ManyToMany(() => PropertyAmenity, (amenity) => amenity.properties, {
-		cascade: ["insert"]
+	@ManyToMany(() => Amenity, (amenity) => amenity.properties, {
+		cascade: ['insert'],
 	})
-	@JoinTable()
-	amenities?: PropertyAmenity[];
+	@JoinTable({
+		name: 'properties_amenities',
+		joinColumn: {
+			name: 'propertyUuid',
+			referencedColumnName: 'uuid',
+		},
+		inverseJoinColumn: {
+			name: 'amenityId',
+			referencedColumnName: 'id',
+		},
+	})
+	amenities?: Amenity[];
 
 
-	@Column()
+	@Column({ default: false })
 	isDraft: boolean;
 
 	@OneToMany(() => PropertyImage, (image) => image.property, {

@@ -19,32 +19,34 @@ export class PropertyAddress {
 	@UpdateDateColumn()
 	updatedDate?: Date;
 
+	@Column({ length: 100, nullable: true })
+	unit?: string;
 
 	@Column({ length: 100 })
 	addressLine1: string;
 
-	@Column({ length: 100, default: '' })
+	@Column({ length: 100, nullable: true })
 	addressLine2: string;
 
-	@Column({ length: 50 })
+	@Column({ length: 50, nullable: true })
 	city: string;
 
-	@Column({ length: 50 })
+	@Column({ length: 50, nullable: true })
 	state: string;
 
-	@Column({ length: 20 })
+	@Column({ length: 50, nullable: true })
 	postalCode: string;
 
 	@Column({ length: 50 })
 	country: string;
 
-	@Column()
+	@Column({ default: false })
 	isManualAddress: boolean;
 
-	@Column({ type: 'decimal' })
+	@Column({ type: 'decimal', nullable: true })
 	latitude: number;
 
-	@Column({ type: 'decimal' })
+	@Column({ type: 'decimal', nullable: true })
 	longitude: number;
 
 	@DeleteDateColumn()
