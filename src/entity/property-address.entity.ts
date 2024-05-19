@@ -13,10 +13,10 @@ export class PropertyAddress {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
-	@CreateDateColumn()
+	@CreateDateColumn({ select: false })
 	createdDate?: Date;
 
-	@UpdateDateColumn()
+	@UpdateDateColumn({ select: false })
 	updatedDate?: Date;
 
 	@Column({ length: 100, nullable: true })
@@ -49,7 +49,7 @@ export class PropertyAddress {
 	@Column({ type: 'decimal', nullable: true })
 	longitude: number;
 
-	@DeleteDateColumn()
+	@DeleteDateColumn({ select: false })
 	deletedDate?: Date;
 
 }

@@ -2,8 +2,6 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
 	OneToMany,
 } from 'typeorm';
 import { FeaturePermission } from './feature-permission.entity';
@@ -27,10 +25,4 @@ export class Feature {
 		(featurePermission) => featurePermission.feature,
 	)
 	featurePermissions: FeaturePermission[];
-
-	@CreateDateColumn()
-	createdDate?: Date;
-
-	@UpdateDateColumn()
-	updatedDate?: Date;
 }
