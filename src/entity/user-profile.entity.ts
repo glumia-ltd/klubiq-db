@@ -9,9 +9,11 @@ import {
 	Generated,
 	JoinColumn,
 	Index,
+	OneToMany,
 } from 'typeorm';
 import { Role } from './role.entity';
 import { OrganizationUser } from './organization-user.entity';
+import { Property } from './property.entity';
 
 @Entity({ schema: 'kdo' })
 export class UserProfile {
@@ -108,6 +110,12 @@ export class UserProfile {
 		{ eager: true },
 	)
 	organizationUser?: OrganizationUser;
+
+	@OneToMany(() => Property, (property) => property.manager)
+	propertiesManaged?: Property[];
+
+	@OneToMany(() => Property, (property) => property.owner)
+	propertiesOwned?: Property[];
 
 	@CreateDateColumn()
 	createdDate?: Date;

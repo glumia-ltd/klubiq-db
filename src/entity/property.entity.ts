@@ -27,6 +27,7 @@ import { PropertyStatus } from './property-status.entity';
 import { OrganizationUser } from './organization-user.entity';
 import { Amenity } from './property-amenity.entity';
 import { PropertyImage } from './property-image.entity';
+import { UserProfile } from './user-profile.entity';
 
 @Entity({ schema: 'poo' })
 @Tree('closure-table', {
@@ -164,15 +165,17 @@ export class Property {
 	isDraft: boolean;
 
 	@OneToMany(() => PropertyImage, (image) => image.property, {
-		cascade: ["insert"]
+		cascade: true
 	})
 	images?: PropertyImage[]
 
-	@ManyToOne(() => OrganizationUser, (orgUser) => orgUser.propertiesOwned)
-	owner?: OrganizationUser;
+	@ManyToOne(() => UserProfile, (user) => user.propertiesOwned)
+	@JoinColumn({ name: 'ownerUid', referencedColumnName: 'firebaseId' })
+	owner?: UserProfile;
 
-	@ManyToOne(() => OrganizationUser, (orgUser) => orgUser.propertiesManaged)
-	manager?: OrganizationUser;
+	@ManyToOne(() => UserProfile, (user) => user.propertiesManaged)
+	@JoinColumn({ name: 'managerUid', referencedColumnName: 'firebaseId' })
+	manager?: UserProfile;
 
 	@Column({ default: false })
 	isListingPublished: boolean;
