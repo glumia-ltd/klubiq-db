@@ -2,8 +2,6 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
 	OneToMany,
 } from 'typeorm';
 import { UserProfile } from './user-profile.entity';
@@ -22,10 +20,4 @@ export class Role {
 
 	@OneToMany(() => UserProfile, (userProfile) => userProfile.systemRole)
 	users?: UserProfile[];
-
-	@CreateDateColumn()
-	createdDate?: Date;
-
-	@UpdateDateColumn()
-	updatedDate?: Date;
 }

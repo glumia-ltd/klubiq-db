@@ -2,8 +2,6 @@ import {
 	Entity,
 	PrimaryGeneratedColumn,
 	Column,
-	CreateDateColumn,
-	UpdateDateColumn,
 	OneToMany,
 } from 'typeorm';
 
@@ -22,12 +20,6 @@ export class Permission {
 
 	@Column({ type: 'text', nullable: true })
 	description?: string;
-
-	@CreateDateColumn()
-	createdDate?: Date;
-
-	@UpdateDateColumn()
-	updatedDate?: Date;
 
 	@OneToMany(
 		() => FeaturePermission,
