@@ -10,10 +10,12 @@ import {
 	JoinColumn,
 	Index,
 	OneToMany,
+	ManyToMany,
 } from 'typeorm';
 import { Role } from './role.entity';
 import { OrganizationUser } from './organization-user.entity';
 import { Property } from './property.entity';
+import { Lease } from './lease.entity';
 
 @Entity({ schema: 'kdo' })
 export class UserProfile {
@@ -116,6 +118,9 @@ export class UserProfile {
 
 	@OneToMany(() => Property, (property) => property.owner)
 	propertiesOwned?: Property[];
+
+	@ManyToMany(() => Lease, (lease) => lease.tenants)
+	leases?: Lease[];
 
 	@CreateDateColumn()
 	createdDate?: Date;

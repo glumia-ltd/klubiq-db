@@ -17,6 +17,9 @@ import { PropertyStatus } from './entity/property-status.entity';
 import { PropertyType } from './entity/property-type.entity';
 import { Amenity } from './entity/property-amenity.entity';
 import { PropertyImage } from './entity/property-image.entity';
+import { Transaction } from './entity/transaction.entity';
+import { Lease } from './entity/lease.entity';
+import { Maintenance } from './entity/maintenance.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -46,7 +49,10 @@ export const AppDataSource = new DataSource({
         PropertyStatus,
         PropertyType,
         Amenity,
-        PropertyImage
+        PropertyImage,
+        Lease,
+        Maintenance,
+        Transaction
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
