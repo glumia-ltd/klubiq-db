@@ -28,6 +28,8 @@ import { OrganizationUser } from './organization-user.entity';
 import { Amenity } from './property-amenity.entity';
 import { PropertyImage } from './property-image.entity';
 import { UserProfile } from './user-profile.entity';
+import { Lease } from './lease.entity';
+import { Maintenance } from './maintenance.entity';
 
 @Entity({ schema: 'poo' })
 @Tree('closure-table', {
@@ -179,4 +181,10 @@ export class Property {
 
 	@Column({ default: false })
 	isListingPublished: boolean;
+
+	@OneToMany(() => Lease, (lease) => lease.property)
+	leases?: Lease[];
+
+	@OneToMany(() => Maintenance, (maintenance) => maintenance.property)
+	maintenances?: Maintenance[];
 }
