@@ -20,6 +20,7 @@ import { PropertyImage } from './entity/property-image.entity';
 import { Transaction } from './entity/transaction.entity';
 import { Lease } from './entity/lease.entity';
 import { Maintenance } from './entity/maintenance.entity';
+import { UserInvitation } from './entity/user.invitation.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -52,7 +53,8 @@ export const AppDataSource = new DataSource({
         PropertyImage,
         Lease,
         Maintenance,
-        Transaction
+        Transaction,
+        UserInvitation
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],

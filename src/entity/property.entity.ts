@@ -187,4 +187,7 @@ export class Property {
 
 	@OneToMany(() => Maintenance, (maintenance) => maintenance.property)
 	maintenances?: Maintenance[];
+
+	@Column({ default: 1 })
+	unitCount: number;
 }
