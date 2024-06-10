@@ -41,6 +41,6 @@ export class UserInvitation {
     @Column({ type: 'timestamp', nullable: true })
     acceptedAt?: string;
 
-    @Column({ type: 'simple-array' })
+    @Column({ type: 'simple-array', nullable: true })
     propertyIds?: string[]
 }
