@@ -15,7 +15,7 @@ import { UserProfile } from './user-profile.entity';
 import { BaseEntity } from './base-entity';
 import { Property } from './property.entity';
 import { Transaction } from './transaction.entity';
-import { PaymentFrequency } from '../types/enums';
+import { LeaseStatus, PaymentFrequency } from '../types/enums';
 @Entity({ schema: 'poo' })
 export class Lease extends BaseEntity {
 
@@ -32,6 +32,13 @@ export class Lease extends BaseEntity {
     })
     paymentFrequency: PaymentFrequency;
 
+    @Column({
+        type: 'enum',
+        enum: LeaseStatus,
+        default: LeaseStatus.NEW,
+    })
+    status: LeaseStatus;
+
 
     @Column({ nullable: true })
     customPaymentFrequency?: number;
@@ -44,18 +51,22 @@ export class Lease extends BaseEntity {
     @Column({ type: 'date' })
     endDate?: Date;
 
+    @Column({ type: 'int', nullable: true })
+    rentDueDay: number;
 
-    @Column({ type: 'date', nullable: true })
-    rentDueDate?: Date;
+    @Column({ type: 'int', nullable: true })
+    rentDueMonth?: number;
 
 
-    @Column({ type: 'money' })
+    @Column({ type: 'decimal', precision: 18, scale: 2 })
     rentAmount: number;
 
 
-    @Column({ type: 'money', nullable: true })
-    securityDeposit: number;
+    @Column({ type: 'decimal', precision: 18, scale: 2, nullable: true })
+    securityDeposit?: number;
 
+    @Column({ default: false })
+    isArchived?: boolean;
 
 
     @DeleteDateColumn({ nullable: true })
