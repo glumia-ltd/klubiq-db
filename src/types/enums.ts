@@ -18,6 +18,17 @@ export enum MaintenanceStatus {
     ON_HOLD = 'On Hold',
 }
 
+
+export enum LeaseStatus {
+    NEW = 'New',
+    SIGNED = 'Signed',
+    ACTIVE = 'Active',
+    IN_ACTIVE = 'In Active',
+    CANCELLED = 'Cancelled',
+    EXPIRED = 'Expired',
+    ON_HOLD = 'On Hold',
+}
+
 export enum MaintenancePriority {
     LOW = 'Low',
     MEDIUM = 'Medium',

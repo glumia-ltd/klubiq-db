@@ -5,10 +5,10 @@ import {
 import { AbstractEntity } from './abstract-entity';
 
 export abstract class BaseEntity extends AbstractEntity {
-    @CreateDateColumn({ select: false })
+    @CreateDateColumn()
     createdDate?: Date;
 
-    @UpdateDateColumn({ select: false })
+    @UpdateDateColumn()
     updatedDate?: Date;
 }
 

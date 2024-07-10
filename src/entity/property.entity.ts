@@ -24,7 +24,6 @@ import { PropertyType } from './property-type.entity';
 import { Organization } from './organization.entity';
 import { PropertyPurpose } from './property-purpose.entity';
 import { PropertyStatus } from './property-status.entity';
-import { OrganizationUser } from './organization-user.entity';
 import { Amenity } from './property-amenity.entity';
 import { PropertyImage } from './property-image.entity';
 import { UserProfile } from './user-profile.entity';
@@ -65,7 +64,7 @@ export class Property {
 
 
 	@Column({ default: false })
-	isMultiUnit: boolean;
+	isMultiUnit?: boolean;
 
 
 	@Column({ type: 'decimal', nullable: true })
@@ -105,14 +104,14 @@ export class Property {
 		name: 'categoryId',
 		referencedColumnName: 'id',
 	})
-	category: PropertyCategory;
+	category?: PropertyCategory;
 
 	@ManyToOne(() => PropertyType, { eager: true })
 	@JoinColumn({
 		name: 'typeId',
 		referencedColumnName: 'id',
 	})
-	type: PropertyType;
+	type?: PropertyType;
 
 	@ManyToOne(() => PropertyPurpose, { eager: true })
 	@JoinColumn({
@@ -138,7 +137,7 @@ export class Property {
 		name: 'organizationUuid',
 		referencedColumnName: 'organizationUuid',
 	})
-	organization: Organization;
+	organization?: Organization;
 
 	@TreeParent()
 	parentProperty?: Property;
@@ -180,7 +179,7 @@ export class Property {
 	manager?: UserProfile;
 
 	@Column({ default: false })
-	isListingPublished: boolean;
+	isListingPublished?: boolean;
 
 	@OneToMany(() => Lease, (lease) => lease.property)
 	leases?: Lease[];
@@ -189,5 +188,5 @@ export class Property {
 	maintenances?: Maintenance[];
 
 	@Column({ default: 1 })
-	unitCount: number;
+	unitCount?: number;
 }

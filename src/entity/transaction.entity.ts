@@ -27,7 +27,7 @@ export class Transaction {
     transactionDate?: Date;
 
 
-    @Column({ type: 'money' })
+    @Column({ type: 'decimal', precision: 18, scale: 2 })
     amount: number;
 
 
