@@ -42,3 +42,12 @@ export enum MaintenanceType {
     INSPECTION = 'Inspection',
     OTHER = 'Other',
 }
+
+export enum RevenueType {
+    PROPERTY_SALES = 'Property Sales',
+    PROPERTY_RENTAL = 'Property Rental',
+}
+
+export enum ExpenseType {
+    PROPERTY_TAX = 'Property Tax',
+}

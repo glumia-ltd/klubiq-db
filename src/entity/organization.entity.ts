@@ -10,6 +10,8 @@ import {
 	Index,
 } from 'typeorm';
 import { OrganizationUser } from './organization-user.entity';
+import { Transaction } from './transaction.entity';
+import { Property } from './property.entity';
 
 @Entity({ schema: 'poo' })
 export class Organization {
@@ -31,16 +33,16 @@ export class Organization {
 	isVerified?: boolean;
 
 	@Column({ nullable: true })
-	email? : string;
+	email?: string;
 
 	@Column({ nullable: true })
-	govRegistrationNumber? : string;
+	govRegistrationNumber?: string;
 
 	@Column({ nullable: true })
-	countryPhoneCode? : string;
+	countryPhoneCode?: string;
 
 	@Column({ nullable: true })
-	phoneNumber? : string;
+	phoneNumber?: string;
 
 	@Index()
 	@Column({ length: 100, unique: true })
@@ -85,7 +87,7 @@ export class Organization {
 	companyType?: string;
 
 	@Column({ nullable: true })
-	website? : string;
+	website?: string;
 
 	@Column({ nullable: true })
 	logoUrl?: string;
@@ -95,5 +97,11 @@ export class Organization {
 
 	@Column({ default: false })
 	isMaintenanceRequestNotificationEnabled?: boolean;
+
+	@OneToMany(() => Property, (property) => property.organization)
+	properties?: Property[];
+
+	@OneToMany(() => Transaction, (transaction) => transaction.organization)
+	transactions?: Transaction[];
 
 }

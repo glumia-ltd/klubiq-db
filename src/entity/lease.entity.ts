@@ -40,7 +40,7 @@ export class Lease extends BaseEntity {
     status: LeaseStatus;
 
 
-    @Column({ nullable: true })
+    @Column({ default: 0 })
     customPaymentFrequency?: number;
 
 
@@ -51,11 +51,8 @@ export class Lease extends BaseEntity {
     @Column({ type: 'date' })
     endDate?: Date;
 
-    @Column({ type: 'int', nullable: true })
-    rentDueDay: number;
-
-    @Column({ type: 'int', nullable: true })
-    rentDueMonth?: number;
+    @Column({ type: 'int', nullable: false })
+    rentDueDay?: number;
 
 
     @Column({ type: 'decimal', precision: 18, scale: 2 })

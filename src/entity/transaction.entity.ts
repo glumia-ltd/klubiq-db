@@ -9,7 +9,8 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Lease } from './lease.entity';
-import { TransactionType } from '../types/enums';
+import { RevenueType, TransactionType } from '../types/enums';
+import { Organization } from './organization.entity';
 
 @Entity({ schema: 'poo' })
 export class Transaction {
@@ -32,7 +33,10 @@ export class Transaction {
 
 
     @Column({ type: 'enum', enum: TransactionType })
-    type: TransactionType;
+    transactionType: TransactionType;
+
+    @Column({ type: 'enum', enum: RevenueType })
+    revenueType: RevenueType;
 
     @CreateDateColumn({ select: false })
     createdDate?: Date;
@@ -45,4 +49,12 @@ export class Transaction {
     @ManyToOne(() => Lease, (lease) => lease.transactions)
     @JoinColumn({ name: 'leaseId', referencedColumnName: 'id' })
     lease?: Lease;
+
+    @Index()
+    @ManyToOne(() => Organization, (organization) => organization.transactions)
+    @JoinColumn({
+        name: 'organizationUuid',
+        referencedColumnName: 'organizationUuid',
+    })
+    organization?: Organization;
 }
