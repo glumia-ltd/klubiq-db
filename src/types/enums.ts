@@ -8,6 +8,9 @@ export enum PaymentFrequency {
     BI_WEEKLY = 'Bi-Weekly',
     MONTHLY = 'Monthly',
     ANNUALLY = 'Annually',
+    ONE_TIME = 'One Time',
+    BI_MONTHLY = 'Bi-Monthly',
+    QUARTERLY = 'Quarterly',
     CUSTOM = 'Custom',
 }
 
@@ -27,7 +30,10 @@ export enum LeaseStatus {
     CANCELLED = 'Cancelled',
     EXPIRED = 'Expired',
     ON_HOLD = 'On Hold',
+    EXPIRING = 'Expiring',
+    TERMINATED = 'Terminated',
 }
+
 
 export enum MaintenancePriority {
     LOW = 'Low',
@@ -50,4 +56,9 @@ export enum RevenueType {
 
 export enum ExpenseType {
     PROPERTY_TAX = 'Property Tax',
+}
+export enum ADMIN_DOMAINS {
+    KLUBIQ_COM = 'klubiq.com',
+    GLUMIA_NG = 'glumia.ng',
+    GLUMIA_COM = 'glumia.com',
 }
