@@ -16,6 +16,7 @@ import { BaseEntity } from './base-entity';
 import { Property } from './property.entity';
 import { Transaction } from './transaction.entity';
 import { LeaseStatus, PaymentFrequency } from '../types/enums';
+import { TenantUser } from './tenant.entity';
 @Entity({ schema: 'poo' })
 export class Lease extends BaseEntity {
 
@@ -73,19 +74,20 @@ export class Lease extends BaseEntity {
     @Column({ default: false })
     isDraft?: boolean;
 
-    @ManyToMany(() => UserProfile, (user) => user.leases)
+    @ManyToMany(() => TenantUser, (user) => user.leases)
     @JoinTable({
-        name: 'tenants_leases',
+        name: 'leases_tenants',
         joinColumn: {
             name: 'leaseId',
             referencedColumnName: 'id',
         },
         inverseJoinColumn: {
-            name: 'tenantUid',
-            referencedColumnName: 'firebaseId',
+            name: 'tenantId',
+            referencedColumnName: 'id',
         },
+
     })
-    tenants?: UserProfile[];
+    tenants?: TenantUser[];
 
     @Index()
     @ManyToOne(() => Property, (property) => property.leases)

@@ -15,7 +15,7 @@ import {
 import { Role } from './role.entity';
 import { OrganizationUser } from './organization-user.entity';
 import { Property } from './property.entity';
-import { Lease } from './lease.entity';
+import { TenantUser } from './tenant.entity';
 
 @Entity({ schema: 'kdo' })
 export class UserProfile {
@@ -31,8 +31,8 @@ export class UserProfile {
 
 
 	@Index()
-	@Column({ unique: true })
-	firebaseId: string;
+	@Column({ unique: true, nullable: true })
+	firebaseId?: string;
 
 
 	@Index()
@@ -119,12 +119,16 @@ export class UserProfile {
 	@OneToMany(() => Property, (property) => property.owner)
 	propertiesOwned?: Property[];
 
-	@ManyToMany(() => Lease, (lease) => lease.tenants)
-	leases?: Lease[];
-
 	@CreateDateColumn()
 	createdDate?: Date;
 
 	@UpdateDateColumn()
 	updatedDate?: Date;
+
+	@OneToOne(
+		() => TenantUser,
+		(tenantUser) => tenantUser.profile,
+		{ eager: true },
+	)
+	tenantUser?: TenantUser;
 }
