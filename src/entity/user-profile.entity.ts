@@ -31,8 +31,8 @@ export class UserProfile {
 
 
 	@Index()
-	@Column({ unique: true, nullable: true })
-	firebaseId?: string;
+	@Column({ unique: true })
+	firebaseId: string;
 
 
 	@Index()
