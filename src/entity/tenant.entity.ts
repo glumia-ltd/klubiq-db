@@ -48,4 +48,7 @@ export class TenantUser {
 	@UpdateDateColumn()
 	updatedDate?: Date;
 
+	@Column({ default: true })
+	isActive?: boolean;
+
 }
