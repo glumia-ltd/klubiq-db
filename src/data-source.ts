@@ -21,6 +21,7 @@ import { Transaction } from './entity/transaction.entity';
 import { Lease } from './entity/lease.entity';
 import { Maintenance } from './entity/maintenance.entity';
 import { UserInvitation } from './entity/user.invitation.entity';
+import { TenantUser } from './entity/tenant.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -54,7 +55,8 @@ export const AppDataSource = new DataSource({
         Lease,
         Maintenance,
         Transaction,
-        UserInvitation
+        UserInvitation,
+        TenantUser
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
