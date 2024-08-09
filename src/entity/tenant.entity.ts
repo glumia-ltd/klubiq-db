@@ -7,6 +7,7 @@ import {
 	CreateDateColumn,
 	ManyToMany,
 	UpdateDateColumn,
+	Index,
 } from 'typeorm';
 import { UserProfile } from './user-profile.entity';
 import { Lease } from './lease.entity';
@@ -22,6 +23,10 @@ export class TenantUser {
 	@Column({ type: 'varchar', length: 255, nullable: true })
 	firstName?: string;
 
+
+	@Index()
+	@Column({ unique: true })
+	email: string;
 
 	@Column({ type: 'varchar', length: 255, nullable: true })
 	lastName?: string;
