@@ -56,4 +56,7 @@ export class TenantUser {
 	@Column({ default: true })
 	isActive?: boolean;
 
+	@Column({ nullable: true })
+	dateOfBirth?: Date;
+
 }
