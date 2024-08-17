@@ -8,10 +8,13 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	Index,
+	JoinColumn,
+	OneToOne,
 } from 'typeorm';
 import { OrganizationUser } from './organization-user.entity';
 import { Transaction } from './transaction.entity';
 import { Property } from './property.entity';
+import { OrganizationSettings } from './organization-settings.entity';
 
 @Entity({ schema: 'poo' })
 export class Organization {
@@ -92,16 +95,14 @@ export class Organization {
 	@Column({ nullable: true })
 	logoUrl?: string;
 
-	@Column({ default: false })
-	isRentDueEmailNotificationEnabled?: boolean;
-
-	@Column({ default: false })
-	isMaintenanceRequestNotificationEnabled?: boolean;
-
 	@OneToMany(() => Property, (property) => property.organization)
 	properties?: Property[];
 
 	@OneToMany(() => Transaction, (transaction) => transaction.organization)
 	transactions?: Transaction[];
+
+	@OneToOne(() => OrganizationSettings, settings => settings.organization,
+		{ cascade: ['insert', 'remove'], eager: true })
+	settings: OrganizationSettings;
 
 }

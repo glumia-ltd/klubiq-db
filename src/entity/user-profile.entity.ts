@@ -16,6 +16,7 @@ import { Role } from './role.entity';
 import { OrganizationUser } from './organization-user.entity';
 import { Property } from './property.entity';
 import { TenantUser } from './tenant.entity';
+import { UserPreferences } from './user-preferences.entity';
 
 @Entity({ schema: 'kdo' })
 export class UserProfile {
@@ -131,4 +132,7 @@ export class UserProfile {
 		{ eager: true },
 	)
 	tenantUser?: TenantUser;
+
+	@OneToOne(() => UserPreferences, (preferences) => preferences.profile, { eager: true, cascade: ['insert', 'remove'] })
+	preferences: UserPreferences
 }
