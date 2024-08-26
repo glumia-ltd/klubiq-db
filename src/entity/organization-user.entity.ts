@@ -10,7 +10,6 @@ import {
 	CreateDateColumn,
 	UpdateDateColumn,
 	Index,
-	OneToMany,
 } from 'typeorm';
 import { UserProfile } from './user-profile.entity';
 import { OrganizationRole } from './organization-role.entity';
@@ -58,6 +57,7 @@ export class OrganizationUser {
 		name: 'profileUuid',
 		referencedColumnName: 'profileUuid',
 	})
+	@Index('IDX_PROFILE_ORG_USER')
 	profile?: UserProfile;
 
 	@ManyToOne(() => OrganizationRole, { eager: true })

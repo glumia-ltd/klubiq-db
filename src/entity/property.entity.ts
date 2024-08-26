@@ -7,77 +7,54 @@ import {
 	Generated,
 	Index,
 	JoinColumn,
-	JoinTable,
-	ManyToMany,
 	ManyToOne,
 	OneToMany,
 	OneToOne,
+	ManyToMany,
 	PrimaryGeneratedColumn,
-	Tree,
-	TreeChildren,
-	TreeParent,
 	UpdateDateColumn,
+	JoinTable,
 } from 'typeorm';
 import { PropertyAddress } from './property-address.entity';
-import { PropertyCategory } from './property-category.entity';
-import { PropertyType } from './property-type.entity';
+import { Unit } from './unit.entity';
+import { Maintenance } from './maintenance.entity';
 import { Organization } from './organization.entity';
+import { Amenity } from './property-amenity.entity';
+import { PropertyCategory } from './property-category.entity';
+import { PropertyImage } from './property-image.entity';
 import { PropertyPurpose } from './property-purpose.entity';
 import { PropertyStatus } from './property-status.entity';
-import { Amenity } from './property-amenity.entity';
-import { PropertyImage } from './property-image.entity';
+import { PropertyType } from './property-type.entity';
 import { UserProfile } from './user-profile.entity';
-import { Lease } from './lease.entity';
-import { Maintenance } from './maintenance.entity';
 
 @Entity({ schema: 'poo' })
-@Tree('closure-table', {
-	closureTableName: 'property_unit',
-})
+@Index('IDX_PROPERTY_TYPE_STATUS', ['type', 'status'])
+@Index('IDX_PROPERTY_FILTER', ['name', 'purpose', 'type', 'status'])
 export class Property {
 
 	@PrimaryGeneratedColumn('uuid')
 	uuid?: string;
 
-
 	@Index()
 	@Generated('increment')
-	@Column({ unique: true })
+	@Column({ unique: true, type: 'bigint' })
 	id?: number;
-
 
 	@Index()
 	@Column({ length: 100 })
 	name: string;
 
-
 	@Column({ type: 'text', nullable: true })
 	description?: string;
-
 
 	@Column({ type: 'text', nullable: true })
 	note?: string;
 
-
 	@Column({ type: 'simple-array', nullable: true })
 	tags?: string[];
 
-
 	@Column({ default: false })
 	isMultiUnit?: boolean;
-
-
-	@Column({ type: 'decimal', nullable: true })
-	bedroom?: number;
-
-
-	@Column({ type: 'decimal', nullable: true })
-	bathroom?: number;
-
-
-	@Column({ type: 'decimal', nullable: true })
-	toilet?: number;
-
 
 	@Column({ type: 'json', nullable: true })
 	area?: { value: number; unit: string };
@@ -85,10 +62,8 @@ export class Property {
 	@DeleteDateColumn({ select: false })
 	deletedDate?: Date;
 
-
 	@Column({ default: false })
 	isArchived?: boolean;
-
 
 	@Column({ nullable: true, select: false })
 	archivedDate?: Date;
@@ -104,6 +79,7 @@ export class Property {
 		name: 'categoryId',
 		referencedColumnName: 'id',
 	})
+	@Index('IDX_CATEGORY', ['categoryId'])
 	category?: PropertyCategory;
 
 	@ManyToOne(() => PropertyType, { eager: true })
@@ -111,6 +87,7 @@ export class Property {
 		name: 'typeId',
 		referencedColumnName: 'id',
 	})
+	@Index('IDX_TYPE', ['typeId'])
 	type?: PropertyType;
 
 	@ManyToOne(() => PropertyPurpose, { eager: true })
@@ -118,32 +95,38 @@ export class Property {
 		name: 'purposeId',
 		referencedColumnName: 'id',
 	})
+	@Index('IDX_PURPOSE', ['purposeId'])
 	purpose?: PropertyPurpose;
-
 
 	@ManyToOne(() => PropertyStatus, { eager: true })
 	@JoinColumn({
 		name: 'statusId',
 		referencedColumnName: 'id',
 	})
+	@Index('IDX_STATUS', ['statusId'])
 	status?: PropertyStatus;
 
-	@OneToOne(() => PropertyAddress, { eager: true, cascade: ['insert'], nullable: true })
+	@OneToOne(() => PropertyAddress, {
+		eager: true,
+		cascade: ['insert'],
+		nullable: true,
+	})
 	@JoinColumn()
 	address?: PropertyAddress;
 
-	@ManyToOne(() => Organization, { eager: true })
+	@Index('IDX_ORGANIZATION', ['organizationUuid'])
+	@ManyToOne(() => Organization, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
 	@JoinColumn({
 		name: 'organizationUuid',
 		referencedColumnName: 'organizationUuid',
 	})
 	organization?: Organization;
 
-	@TreeParent()
-	parentProperty?: Property;
+	@OneToMany(() => Unit, unit => unit.property, { cascade: true, onDelete: 'CASCADE', onUpdate: 'CASCADE', lazy: true })
+	units?: Promise<Unit[]>;
 
-	@TreeChildren({ cascade: true })
-	units?: Property[];
+	@Column({ default: 1 })
+	unitCount?: number;
 
 	@ManyToMany(() => Amenity, (amenity) => amenity.properties, {
 		cascade: ['insert'],
@@ -161,32 +144,27 @@ export class Property {
 	})
 	amenities?: Amenity[];
 
-
 	@Column({ default: false })
-	isDraft: boolean;
+	isDraft?: boolean;
 
 	@OneToMany(() => PropertyImage, (image) => image.property, {
-		cascade: true
+		cascade: true, lazy: true,
 	})
-	images?: PropertyImage[]
+	images?: Promise<PropertyImage[]>;
 
-	@ManyToOne(() => UserProfile, (user) => user.propertiesOwned)
+	@Index('IDX_OWNER', ['ownerUid'])
+	@ManyToOne(() => UserProfile, (user) => user.propertiesOwned, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
 	@JoinColumn({ name: 'ownerUid', referencedColumnName: 'firebaseId' })
 	owner?: UserProfile;
 
-	@ManyToOne(() => UserProfile, (user) => user.propertiesManaged)
+	@Index('IDX_MANAGER', ['managerUid'])
+	@ManyToOne(() => UserProfile, (user) => user.propertiesManaged, { onDelete: 'SET NULL', onUpdate: 'CASCADE' })
 	@JoinColumn({ name: 'managerUid', referencedColumnName: 'firebaseId' })
 	manager?: UserProfile;
 
 	@Column({ default: false })
 	isListingPublished?: boolean;
 
-	@OneToMany(() => Lease, (lease) => lease.property)
-	leases?: Lease[];
-
 	@OneToMany(() => Maintenance, (maintenance) => maintenance.property)
 	maintenances?: Maintenance[];
-
-	@Column({ default: 1 })
-	unitCount?: number;
 }

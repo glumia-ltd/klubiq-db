@@ -62,3 +62,8 @@ export enum ADMIN_DOMAINS {
     GLUMIA_NG = 'glumia.ng',
     GLUMIA_COM = 'glumia.com',
 }
+
+export enum UnitStatus {
+    VACANT = 'Vacant',
+    OCCUPIED = 'Occupied',
+}
