@@ -10,7 +10,7 @@ import {
 @Entity({ schema: 'poo' })
 export class PropertyAddress {
 
-	@PrimaryGeneratedColumn()
+	@PrimaryGeneratedColumn({ type: 'bigint' })
 	public id: number;
 
 	@CreateDateColumn({ select: false })
