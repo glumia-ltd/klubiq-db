@@ -22,9 +22,7 @@ import { TenantUser } from './tenant.entity';
 import { Unit } from './unit.entity';
 
 @Entity({ schema: 'poo' })
-@Index('idx_lease_dates_status', ['startDate', 'endDate'
-    // , 'status'
-])
+// @Index('idx_lease_dates_status', ['startDate', 'endDate', 'status'])
 @Index('idx_lease_dates', ['startDate', 'endDate'])
 export class Lease {
     @PrimaryGeneratedColumn()
