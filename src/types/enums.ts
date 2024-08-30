@@ -22,14 +22,14 @@ export enum MaintenanceStatus {
 }
 
 
-// export enum LeaseStatus {
-//     ACTIVE = 'Active',
-//     IN_ACTIVE = 'In Active',
-//     CANCELLED = 'Cancelled',
-//     EXPIRED = 'Expired',
-//     EXPIRING = 'Expiring',
-//     TERMINATED = 'Terminated',
-// }
+export enum LeaseStatus {
+    ACTIVE = 'Active',
+    IN_ACTIVE = 'In Active',
+    CANCELLED = 'Cancelled',
+    EXPIRED = 'Expired',
+    EXPIRING = 'Expiring',
+    TERMINATED = 'Terminated',
+}
 
 
 export enum MaintenancePriority {

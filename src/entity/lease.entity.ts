@@ -22,7 +22,7 @@ import { TenantUser } from './tenant.entity';
 import { Unit } from './unit.entity';
 
 @Entity({ schema: 'poo' })
-// @Index('idx_lease_dates_status', ['startDate', 'endDate', 'status'])
+@Index('idx_lease_dates_status', ['startDate', 'endDate', 'status'])
 @Index('idx_lease_dates', ['startDate', 'endDate'])
 export class Lease {
     @PrimaryGeneratedColumn()
@@ -40,13 +40,13 @@ export class Lease {
     @Index('idx_lease_payment_frequency')
     paymentFrequency: PaymentFrequency;
 
-    // @Column({
-    //     type: 'enum',
-    //     enum: LeaseStatus,
-    //     default: LeaseStatus.ACTIVE,
-    // })
-    // @Index('idx_lease_status')
-    // status?: LeaseStatus;
+    @Column({
+        type: 'enum',
+        enum: LeaseStatus,
+        default: LeaseStatus.ACTIVE,
+    })
+    @Index('idx_lease_status')
+    status?: LeaseStatus;
 
     @Column({ default: 0 })
     @Index('idx_lease_custom_payment_frequency')
