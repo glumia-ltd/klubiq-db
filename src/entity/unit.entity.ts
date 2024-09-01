@@ -7,7 +7,6 @@ import { PropertyImage } from './property-image.entity';
 @Entity({ schema: 'poo' })
 export class Unit {
     @PrimaryGeneratedColumn({ type: 'bigint' })
-    @Index('IDX_UNIT_ID', { unique: true })
     id: number;
 
     @Column({ type: 'varchar', length: 50 })

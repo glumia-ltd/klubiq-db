@@ -25,18 +25,25 @@ export class UserProfile {
 	profileUuid?: string;
 
 
-	@Index()
+	@Index('IDX_PROFILE_ID')
 	@Generated('increment')
 	@Column({ unique: true })
 	profileId?: number;
 
+	@Column({ length: 100, nullable: true })
+	firstName?: string;
+
+	@Column({ length: 100, nullable: true })
+	lastName?: string;
+
 
 	@Index()
 	@Column({ unique: true })
+	@Index('IDX_FIREBASE_ID')
 	firebaseId: string;
 
 
-	@Index()
+	@Index('IDX_EMAIL')
 	@Column({ unique: true })
 	email: string;
 

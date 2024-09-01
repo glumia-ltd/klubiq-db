@@ -19,6 +19,7 @@ export class UserPreferences extends AbstractEntity {
     @OneToOne(() => UserProfile, (profile) => profile.preferences)
     @Index()
     @JoinColumn({ name: 'userId', referencedColumnName: 'firebaseId' })
+    @Index('IDX_USER_PREFERENCES_PROFILE')
     profile?: UserProfile;
 
 }

@@ -23,18 +23,19 @@ export class OrganizationUser {
 	organizationUserUuid?: string;
 
 
-	@Index()
+	@Index('IDX_ORG_USER_ID')
 	@Generated('increment')
 	@Column({ unique: true })
 	organizationUserId?: number;
 
 
-	@Index()
+	@Index('IDX_ORG_USER_FIREBASE_ID')
 	@Column({ unique: true })
 	firebaseId: string;
 
 
 	@Column({ default: true })
+	@Index('IDX_ORG_USER_ACTIVE')
 	isActive?: boolean;
 
 
@@ -72,6 +73,7 @@ export class OrganizationUser {
 		name: 'organizationUuid',
 		referencedColumnName: 'organizationUuid',
 	})
+	@Index('IDX_ORG_USER_ORGANIZATION')
 	organization?: Organization;
 
 	@DeleteDateColumn()
