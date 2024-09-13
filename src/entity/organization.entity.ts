@@ -15,6 +15,7 @@ import { OrganizationUser } from './organization-user.entity';
 import { Transaction } from './transaction.entity';
 import { Property } from './property.entity';
 import { OrganizationSettings } from './organization-settings.entity';
+import { OrganizationSubscriptions } from './organization-subscriptions.entity';
 
 @Entity({ schema: 'poo' })
 export class Organization {
@@ -105,5 +106,11 @@ export class Organization {
 	@OneToOne(() => OrganizationSettings, settings => settings.organization,
 		{ cascade: ['insert', 'remove'], eager: true })
 	settings: OrganizationSettings;
+
+	@OneToMany(() => OrganizationSubscriptions, (subscription) => subscription.organization, {
+		eager: true,
+		cascade: ['insert', 'remove'],
+	})
+	subscriptions?: OrganizationSubscriptions[];
 
 }
