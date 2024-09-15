@@ -68,7 +68,7 @@ export const AppDataSource = new DataSource({
         Unit,
         OrganizationSubscriptions,
         OrganizationCounter,
-        SubscriptionPlan
+        SubscriptionPlan,
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
