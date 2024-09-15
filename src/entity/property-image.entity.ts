@@ -2,6 +2,7 @@ import { Entity, Column, ManyToOne, Index, JoinColumn } from 'typeorm';
 import { AbstractEntity } from './abstract-entity';
 import { Property } from './property.entity';
 import { Unit } from './unit.entity';
+import { Organization } from './organization.entity';
 
 @Entity({ schema: 'kdo' })
 export class PropertyImage extends AbstractEntity {
@@ -12,13 +13,13 @@ export class PropertyImage extends AbstractEntity {
 
     @Column({
         type: 'timestamptz',
-        nullable: true,
+        nullable: false,
         default: () => 'CURRENT_TIMESTAMP',
     })
     uploadDate?: Date;
 
 
-    @Column({ type: 'decimal', nullable: true })
+    @Column({ type: 'decimal', nullable: false, default: 0 })
     fileSize?: number;
 
 
@@ -32,6 +33,17 @@ export class PropertyImage extends AbstractEntity {
     @ManyToOne(() => Unit, unit => unit.images, { onDelete: 'CASCADE', nullable: true })
     @JoinColumn({ name: 'unitId' })
     @Index('IDX_PROPERTY_IMAGES_UNIT_ID')
-    unit: Unit;
+    unit?: Unit;
+
+    @ManyToOne(
+        () => Organization,
+        (organization) => organization.propertyImages,
+        {
+            onDelete: 'CASCADE',
+        },
+    )
+    @JoinColumn({ name: 'organizationUuid' })
+    @Index('IDX_ORGANIZATION_IMAGES_ORGANIZATION_ID')
+    organization: Organization;
 }
 

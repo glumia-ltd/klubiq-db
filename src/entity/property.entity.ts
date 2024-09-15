@@ -10,16 +10,13 @@ import {
 	ManyToOne,
 	OneToMany,
 	OneToOne,
-	ManyToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
-	JoinTable,
 } from 'typeorm';
 import { PropertyAddress } from './property-address.entity';
 import { Unit } from './unit.entity';
 import { Maintenance } from './maintenance.entity';
 import { Organization } from './organization.entity';
-import { Amenity } from './property-amenity.entity';
 import { PropertyCategory } from './property-category.entity';
 import { PropertyImage } from './property-image.entity';
 import { PropertyPurpose } from './property-purpose.entity';
@@ -127,22 +124,6 @@ export class Property {
 
 	@Column({ default: 1 })
 	unitCount?: number;
-
-	@ManyToMany(() => Amenity, (amenity) => amenity.properties, {
-		cascade: ['insert'],
-	})
-	@JoinTable({
-		name: 'properties_amenities',
-		joinColumn: {
-			name: 'propertyUuid',
-			referencedColumnName: 'uuid',
-		},
-		inverseJoinColumn: {
-			name: 'amenityId',
-			referencedColumnName: 'id',
-		},
-	})
-	amenities?: Amenity[];
 
 	@Column({ default: false })
 	isDraft?: boolean;

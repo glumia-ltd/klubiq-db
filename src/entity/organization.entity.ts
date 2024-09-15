@@ -16,6 +16,7 @@ import { Transaction } from './transaction.entity';
 import { Property } from './property.entity';
 import { OrganizationSettings } from './organization-settings.entity';
 import { OrganizationSubscriptions } from './organization-subscriptions.entity';
+import { PropertyImage } from './property-image.entity';
 
 @Entity({ schema: 'poo' })
 export class Organization {
@@ -112,5 +113,10 @@ export class Organization {
 		cascade: ['insert', 'remove'],
 	})
 	subscriptions?: OrganizationSubscriptions[];
+
+	@OneToMany(() => PropertyImage, (image) => image.organization, {
+		cascade: ['remove'],
+	})
+	propertyImages?: PropertyImage[];
 
 }
