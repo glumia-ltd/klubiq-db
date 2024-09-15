@@ -25,6 +25,9 @@ import { TenantUser } from './entity/tenant.entity';
 import { UserPreferences } from './entity/user-preferences.entity';
 import { OrganizationSettings } from './entity/organization-settings.entity';
 import { Unit } from './entity/unit.entity';
+import { OrganizationSubscriptions } from './entity/organization-subscriptions.entity';
+import { OrganizationCounter } from './entity/organization-counter.entity';
+import { SubscriptionPlan } from './entity/subscription-plan.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -62,7 +65,10 @@ export const AppDataSource = new DataSource({
         TenantUser,
         UserPreferences,
         OrganizationSettings,
-        Unit
+        Unit,
+        OrganizationSubscriptions,
+        OrganizationCounter,
+        SubscriptionPlan
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
