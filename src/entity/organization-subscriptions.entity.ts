@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, Index, Entity } from "typeorm";
+import { PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, Index, Entity, JoinColumn } from "typeorm";
 import { SubscriptionPlan } from "./subscription-plan.entity";
 import { Organization } from "./organization.entity";
 
@@ -35,12 +35,17 @@ export class OrganizationSubscriptions {
     @Column({ default: 'pending' })
     payment_status: string;
 
+    @Column()
+    is_free_trial: boolean;
+
 
     @ManyToOne(() => Organization, (organization) => organization.subscriptions)
+    @JoinColumn({ name: 'organizationUuid' })
     organization?: Organization;
 
 
     @ManyToOne(() => SubscriptionPlan, (subscriptionPlan) => subscriptionPlan.organizations)
+    @JoinColumn({ name: 'subscription_plan_id' })
     subscription_plan?: SubscriptionPlan;
 
 }

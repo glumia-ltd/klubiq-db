@@ -12,13 +12,13 @@ export class Unit {
     @Column({ type: 'varchar', length: 50 })
     unitNumber: string;
 
-    @Column('int', { nullable: true })
+    @Column({ type: 'int', nullable: true })
     floor: number;
 
-    @Column('int', { nullable: true })
+    @Column({ type: 'int', nullable: true })
     rooms: number;
 
-    @Column('int', { nullable: true })
+    @Column({ type: 'int', nullable: true })
     offices: number;
 
     @Column({ type: 'int', nullable: true })
@@ -33,7 +33,7 @@ export class Unit {
     @Column({ type: 'json', nullable: true })
     area: { value: number; unit: string };
 
-    @Column('decimal', { precision: 10, scale: 2 })
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
     rentAmount?: number;
 
     @Column({
