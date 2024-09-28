@@ -15,5 +15,6 @@ export class PropertyCategory extends AbstractEntity {
 	@Column({ length: 255, unique: true })
 	displayText: string;
 
-
+	@Column('jsonb', { nullable: true })
+	metaData?: Record<string, any>;
 }

@@ -9,7 +9,7 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Lease } from './lease.entity';
-import { RevenueType, TransactionType } from '../types/enums';
+import { PaymentStatus, RevenueType, TransactionType } from '../types/enums';
 import { Organization } from './organization.entity';
 
 @Entity({ schema: 'poo' })
@@ -35,7 +35,7 @@ export class Transaction {
     @Column({ type: 'enum', enum: TransactionType })
     transactionType: TransactionType;
 
-    @Column({ type: 'enum', enum: RevenueType })
+    @Column({ type: 'enum', enum: RevenueType, nullable: true })
     revenueType: RevenueType;
 
     @CreateDateColumn({ select: false })
@@ -57,4 +57,10 @@ export class Transaction {
         referencedColumnName: 'organizationUuid',
     })
     organization?: Organization;
+
+    @Column({ type: 'text', nullable: true })
+    description?: string;
+
+    @Column({ type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING })
+    status: PaymentStatus;
 }

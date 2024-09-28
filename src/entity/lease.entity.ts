@@ -52,13 +52,16 @@ export class Lease {
     @Index('idx_lease_custom_payment_frequency')
     customPaymentFrequency?: number;
 
+    @Column({ type: 'date', nullable: true })
+    @Index('idx_lease_last_payment_date')
+    lastPaymentDate?: Date;
 
     @Column({ type: 'date' })
     @Index('idx_lease_start_date')
     startDate?: Date;
 
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', nullable: true })
     @Index('idx_lease_end_date')
     endDate?: Date;
 
@@ -74,6 +77,9 @@ export class Lease {
 
     @Column({ type: 'decimal', precision: 18, scale: 2, nullable: true })
     securityDeposit?: number;
+
+    @Column({ type: 'decimal', precision: 18, scale: 2, nullable: true })
+    lateFeeAmount?: number;
 
     @CreateDateColumn()
     createdDate?: Date;

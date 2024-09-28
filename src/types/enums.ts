@@ -64,3 +64,11 @@ export enum UnitStatus {
     VACANT = 'Vacant',
     OCCUPIED = 'Occupied',
 }
+
+export enum PaymentStatus {
+    PENDING = 'Pending',
+    PAID = 'Paid',
+    UNPAID = 'Unpaid',
+    OVERDUE = 'Overdue',
+    PARTIAL = 'Partial',
+}
