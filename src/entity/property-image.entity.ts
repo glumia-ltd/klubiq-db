@@ -26,6 +26,12 @@ export class PropertyImage extends AbstractEntity {
     @Column({ default: false })
     isMain?: boolean;
 
+    @Column({ type: 'varchar', nullable: true })
+    externalId?: string;
+
+    @Column({ type: 'varchar', nullable: true })
+    fileName?: string;
+
     @ManyToOne(() => Property, (property) => property.images, { onDelete: 'CASCADE' })
     @Index('IDX_PROPERTY_IMAGES_PROPERTY_ID')
     property?: Property;

@@ -28,6 +28,7 @@ import { Unit } from './entity/unit.entity';
 import { OrganizationSubscriptions } from './entity/organization-subscriptions.entity';
 import { OrganizationCounter } from './entity/organization-counter.entity';
 import { SubscriptionPlan } from './entity/subscription-plan.entity';
+import { NotificationSubscription } from './entity/notification-subscription.entity';
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -68,7 +69,8 @@ export const AppDataSource = new DataSource({
         Unit,
         OrganizationSubscriptions,
         OrganizationCounter,
-        SubscriptionPlan
+        SubscriptionPlan,
+        NotificationSubscription
     ],
     migrations: ['build/migrations/*-changes.js'],
     subscribers: [],
