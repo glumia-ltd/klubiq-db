@@ -10,7 +10,7 @@ import { NotificationPriority } from "../types/enums";
 @Index('idx_notifications_user_read', ['userId', 'isRead'])
 export class Notifications {
 
-    @Column()
+    @Column({ nullable: true })
     actionLink: string;
 
     @CreateDateColumn()
@@ -22,6 +22,7 @@ export class Notifications {
     @Index('idx_notification_delivered_at')
     @Column({ type: 'timestamp without time zone', nullable: true })
     deliveredAt: Date;
+
 
     @Column({ type: 'timestamp without time zone', nullable: true })
     expiresAt: Date;
@@ -36,7 +37,7 @@ export class Notifications {
     @Column({ type: 'boolean', default: false, nullable: true })
     isRead: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     leaseId: number;
 
     @Column({ type: 'text' })
@@ -46,7 +47,7 @@ export class Notifications {
     @Index('idx_notification_organization_uuid')
     organizationUuid?: string;
 
-    @Column()
+    @Column({ nullable: true })
     propertyId: string;
 
     @Column({
@@ -69,10 +70,10 @@ export class Notifications {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @Column()
+    @Column({ nullable: true })
     unitId: number;
 
-    @Column()
+    @Column({ nullable: true })
     @Index('idx_notification_user_id')
     userId: string;
 
