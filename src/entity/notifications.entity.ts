@@ -4,10 +4,15 @@ import { Unit } from "./unit.entity";
 import { UserProfile } from "./user-profile.entity";
 import { Property } from "./property.entity";
 import { Lease } from "./lease.entity";
+import { NotificationPriority } from "../types/enums";
 
 @Entity({ schema: 'kdo' })
 @Index('idx_notifications_user_read', ['userId', 'isRead'])
 export class Notifications {
+
+    @Column()
+    actionLink: string;
+
     @CreateDateColumn()
     createdAt: Date;
 
@@ -17,6 +22,9 @@ export class Notifications {
     @Index('idx_notification_delivered_at')
     @Column({ type: 'timestamp without time zone', nullable: true })
     deliveredAt: Date;
+
+    @Column({ type: 'timestamp without time zone', nullable: true })
+    expiresAt: Date;
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -40,6 +48,13 @@ export class Notifications {
 
     @Column()
     propertyId: string;
+
+    @Column({
+        type: 'enum',
+        enum: NotificationPriority,
+        default: NotificationPriority.LOW,
+    })
+    priority?: NotificationPriority;
 
     @Column({ type: 'timestamp without time zone', nullable: true })
     readAt: Date;

@@ -1,3 +1,11 @@
+
+export enum Priority {
+    LOW = 'Low',
+    MEDIUM = 'Medium',
+    HIGH = 'High',
+    URGENT = 'Urgent',
+}
+
 export enum TransactionType {
     REVENUE = 'Revenue',
     EXPENSE = 'Expense',
@@ -33,10 +41,10 @@ export enum LeaseStatus {
 
 
 export enum MaintenancePriority {
-    LOW = 'Low',
-    MEDIUM = 'Medium',
-    HIGH = 'High',
-    URGENT = 'Urgent',
+    LOW = Priority.LOW,
+    MEDIUM = Priority.MEDIUM,
+    HIGH = Priority.HIGH,
+    URGENT = Priority.URGENT,
 }
 
 export enum MaintenanceType {
@@ -71,4 +79,11 @@ export enum PaymentStatus {
     UNPAID = 'Unpaid',
     OVERDUE = 'Overdue',
     PARTIAL = 'Partial',
+}
+
+export enum NotificationPriority {
+    LOW = Priority.LOW,
+    MEDIUM = Priority.MEDIUM,
+    HIGH = Priority.HIGH,
+    URGENT = Priority.URGENT,
 }
