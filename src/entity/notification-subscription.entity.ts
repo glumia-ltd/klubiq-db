@@ -7,9 +7,9 @@ export class NotificationSubscription {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    // @Index('idx_user_notification_subscription_ID')
-    // @Column()
-    // userEmail: string;
+    @Index('idx_user_notification_subscription_ID')
+    @Column()
+    userId: string;
 
     @Column('jsonb')
     subscription: Record<string, any>;
@@ -19,9 +19,9 @@ export class NotificationSubscription {
     @Index('idx_organization_notification_subscription_uuid')
     organizationUuid?: string;
 
-    // @OneToOne(() => UserProfile)
-    // @JoinColumn({ name: 'userEmail', referencedColumnName: 'email' })
-    // user: UserProfile;
+    @OneToOne(() => UserProfile)
+    @JoinColumn({ name: 'userId', referencedColumnName: 'firebaseId' })
+    user: UserProfile;
 
     @ManyToOne(() => Organization, (organization) => organization.subscriptions)
     @JoinColumn({ name: 'organizationUuid' })
