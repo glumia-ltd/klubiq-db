@@ -78,23 +78,33 @@ export class Notifications {
     userId: string;
 
 
-    @ManyToOne(() => Organization)
+    @ManyToOne(() => Organization, {
+        onDelete: 'CASCADE',
+    })
     @JoinColumn({ name: 'organizationUuid' })
     organization?: Organization;
 
-    @ManyToOne(() => Unit)
+    @ManyToOne(() => Unit, {
+        onDelete: 'SET NULL',
+    })
     @JoinColumn({ name: 'unitId' })
     unit?: Unit;
 
-    @ManyToOne(() => UserProfile)
+    @ManyToOne(() => UserProfile, {
+        onDelete: 'CASCADE',
+    })
     @JoinColumn({ name: 'userId', referencedColumnName: 'firebaseId' })
     user?: UserProfile
 
-    @ManyToOne(() => Property)
+    @ManyToOne(() => Property, {
+        onDelete: 'SET NULL',
+    })
     @JoinColumn({ name: 'propertyId' })
     property?: Property
 
-    @ManyToOne(() => Lease)
+    @ManyToOne(() => Lease, {
+        onDelete: 'SET NULL',
+    })
     @JoinColumn({ name: 'leaseId' })
     lease?: Lease
 }
