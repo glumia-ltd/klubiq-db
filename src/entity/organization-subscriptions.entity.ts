@@ -39,12 +39,12 @@ export class OrganizationSubscriptions {
     is_free_trial: boolean;
 
 
-    @ManyToOne(() => Organization, (organization) => organization.subscriptions)
+    @ManyToOne(() => Organization, (organization) => organization.subscriptions, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'organizationUuid' })
     organization?: Organization;
 
 
-    @ManyToOne(() => SubscriptionPlan, (subscriptionPlan) => subscriptionPlan.organizations)
+    @ManyToOne(() => SubscriptionPlan, (subscriptionPlan) => subscriptionPlan.organizations, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'subscription_plan_id' })
     subscription_plan?: SubscriptionPlan;
 

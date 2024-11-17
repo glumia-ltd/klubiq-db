@@ -8,9 +8,11 @@ import {
 	ManyToMany,
 	UpdateDateColumn,
 	Index,
+	OneToMany,
 } from 'typeorm';
 import { UserProfile } from './user-profile.entity';
 import { Lease } from './lease.entity';
+import { OrganizationTenants } from './organization-tenants.entity';
 
 @Entity({ schema: 'kdo' })
 export class TenantUser {
@@ -58,5 +60,8 @@ export class TenantUser {
 
 	@Column({ nullable: true })
 	dateOfBirth?: Date;
+
+	@OneToMany(() => OrganizationTenants, (organizationTenant) => organizationTenant.tenant)
+	organizationTenants?: OrganizationTenants[];
 
 }
