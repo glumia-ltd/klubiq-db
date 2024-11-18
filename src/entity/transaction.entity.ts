@@ -46,12 +46,16 @@ export class Transaction {
 
 
     @Index()
-    @ManyToOne(() => Lease, (lease) => lease.transactions)
+    @ManyToOne(() => Lease, (lease) => lease.transactions, {
+        onDelete: 'CASCADE',
+    })
     @JoinColumn({ name: 'leaseId', referencedColumnName: 'id' })
     lease?: Lease;
 
     @Index()
-    @ManyToOne(() => Organization, (organization) => organization.transactions)
+    @ManyToOne(() => Organization, (organization) => organization.transactions, {
+        onDelete: 'CASCADE',
+    })
     @JoinColumn({
         name: 'organizationUuid',
         referencedColumnName: 'organizationUuid',
