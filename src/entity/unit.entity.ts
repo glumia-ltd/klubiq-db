@@ -46,7 +46,7 @@ export class Unit {
 
     @ManyToOne(() => Property, property => property.units,
         {
-            //onDelete: 'CASCADE',
+            onDelete: 'SET NULL',
             onUpdate: 'CASCADE'
         })
     @JoinColumn({ name: 'propertyUuid' })

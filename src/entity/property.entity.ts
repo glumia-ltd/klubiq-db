@@ -118,7 +118,6 @@ export class Property {
 
 	@OneToMany(() => Unit, unit => unit.property, {
 		cascade: true,
-		//onDelete: 'CASCADE', 
 		onUpdate: 'CASCADE', lazy: true
 	})
 	units?: Promise<Unit[]>;
