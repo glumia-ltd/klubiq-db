@@ -116,7 +116,11 @@ export class Property {
 	})
 	organization?: Organization;
 
-	@OneToMany(() => Unit, unit => unit.property, { cascade: true, onDelete: 'CASCADE', onUpdate: 'CASCADE', lazy: true })
+	@OneToMany(() => Unit, unit => unit.property, {
+		cascade: true,
+		//onDelete: 'CASCADE', 
+		onUpdate: 'CASCADE', lazy: true
+	})
 	units?: Promise<Unit[]>;
 
 	@Column({ default: 1 })

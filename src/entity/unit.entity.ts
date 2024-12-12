@@ -44,7 +44,11 @@ export class Unit {
     status: UnitStatus;
 
 
-    @ManyToOne(() => Property, property => property.units, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+    @ManyToOne(() => Property, property => property.units,
+        {
+            //onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        })
     @JoinColumn({ name: 'propertyUuid' })
     @Index('IDX_PROPERTY_UUID', ['propertyUuid'])
     property: Property;
