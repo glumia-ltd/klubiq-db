@@ -25,7 +25,7 @@ import { Unit } from './unit.entity';
 @Entity({ schema: 'poo' })
 @Index('idx_lease_dates_status', ['startDate', 'endDate', 'status'])
 @Index('idx_lease_dates', ['startDate', 'endDate'])
-// @Index('idx_lease_start_last_payment_freq', ['startDate', 'lastPaymentDate', 'paymentFrequency'])
+@Index('idx_lease_start_last_payment_freq', ['startDate', 'lastPaymentDate', 'paymentFrequency'])
 export class Lease {
     @PrimaryGeneratedColumn()
     id?: number;
@@ -39,13 +39,13 @@ export class Lease {
     @Column({ length: 255, unique: true, nullable: false })
     name?: string;
 
-    // @Column({
-    //     type: 'enum',
-    //     enum: PaymentFrequency,
-    //     default: PaymentFrequency.ANNUALLY,
-    // })
-    // @Index('idx_lease_payment_frequency')
-    // paymentFrequency: PaymentFrequency;
+    @Column({
+        type: 'enum',
+        enum: PaymentFrequency,
+        default: PaymentFrequency.ANNUALLY,
+    })
+    @Index('idx_lease_payment_frequency')
+    paymentFrequency: PaymentFrequency;
 
     @Column({
         type: 'enum',
