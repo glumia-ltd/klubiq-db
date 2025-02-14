@@ -40,6 +40,8 @@ export class Transaction {
 
     @CreateDateColumn({ select: false })
     createdDate?: Date;
+    @CreateDateColumn({ select: false })
+    updatedDate?: Date;
 
     @DeleteDateColumn({ nullable: true })
     deletedAt?: Date;
@@ -65,6 +67,6 @@ export class Transaction {
     @Column({ type: 'text', nullable: true })
     description?: string;
 
-    @Column({ type: 'enum', enum: PaymentStatus, default: PaymentStatus.PENDING })
+    @Column({ type: 'enum', enum: PaymentStatus, default: PaymentStatus.UNPAID })
     status: PaymentStatus;
 }
