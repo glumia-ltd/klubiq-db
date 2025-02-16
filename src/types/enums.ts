@@ -37,6 +37,7 @@ export enum LeaseStatus {
     EXPIRED = 'Expired',
     EXPIRING = 'Expiring',
     TERMINATED = 'Terminated',
+    INACTIVE = 'InActive',
 }
 
 
