@@ -32,12 +32,11 @@ export enum MaintenanceStatus {
 
 export enum LeaseStatus {
     ACTIVE = 'Active',
-    IN_ACTIVE = 'In Active',
     CANCELLED = 'Cancelled',
     EXPIRED = 'Expired',
     EXPIRING = 'Expiring',
     TERMINATED = 'Terminated',
-    INACTIVE = 'InActive',
+    INACTIVE = 'Inactive',
 }
 
 
